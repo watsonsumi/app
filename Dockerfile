@@ -1,5 +1,10 @@
-FROM node:10.16.0-jessie
-# RUN apt-get update && apt-get install git -y && apt-get install imagemagick -y;
+FROM public.ecr.aws/lts/ubuntu:latest
+
+# Actualizar los paquetes existentes en la imagen
+RUN apt-get update && apt-get upgrade -y
+
+# Instalar Node.js y npm
+RUN apt-get install -y nodejs npm
 
 WORKDIR /ecs-app
 
