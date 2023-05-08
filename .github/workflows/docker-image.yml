@@ -1,18 +1,18 @@
-name: Docker Image CI
+FROM node:10.16.0-jessie
+RUN apt-get update && apt-get install git -y && apt-get install imagemagick -y;
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+WORKDIR /ecs-app
 
-jobs:
+COPY package*.json ./
+COPY controller controller
+COPY server.js server.js
 
-  build:
+RUN npm install
+RUN chown -R node:node /ecs-app
 
-    runs-on: ubuntu-latest
+ENV NODE_ENV=production
+ENV ENV_ECS=true
+USER node
+EXPOSE $PORT
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+ENTRYPOINT ["npm", "start"]
