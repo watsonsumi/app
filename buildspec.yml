@@ -1,5 +1,6 @@
 version: 0.2
- env:
+
+env:
   variables:
     AWS_ACCOUNT_ID: "596059741778"
     CLUSTER: "demo"
