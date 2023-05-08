@@ -27,3 +27,8 @@ phases:
       - echo Pushing the Docker image...
       #- docker push 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:$IMAGE_TAG
       - aws ecs update-service --cluster $CLUSTER --service $SERVICE  --force-new-deployment
+artifacts:
+  files: 
+    - imageDetail.json
+    - appspec.yml
+    - taskdef.json
