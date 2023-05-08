@@ -7,7 +7,6 @@ env:
     SERVICE: "appnode"
     IMAGE_REPO_NAME: "appnode"
     IMAGE_TAG: "latest"
-    AWS_DEFAULT_REGION: "us-east-1"
 
 phases:
   pre_build:
