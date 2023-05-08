@@ -13,11 +13,11 @@ COPY controller controller
 COPY server.js server.js
 
 RUN npm install
-RUN chown -R node:node /ecs-app
+# RUN chown -R node:node /ecs-app
 
 ENV NODE_ENV=production
 ENV ENV_ECS=true
-USER node
+# USER node
 EXPOSE 80
 
 ENTRYPOINT ["npm", "start"]
