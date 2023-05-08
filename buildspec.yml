@@ -24,7 +24,7 @@ phases:
       - echo Building the Docker image... 
       - docker build -t 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:latest .
       - echo Copiando imagen de Docker a repositorio...
-      - docker tag appnode:latest 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:latest
+#       - docker tag appnode:latest 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:latest
   post_build:
     commands:
       - echo Build completed on `date`
