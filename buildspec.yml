@@ -20,12 +20,13 @@ phases:
       - echo Building the Docker image... 
       - docker build -t 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:latest .
       - echo Copiando imagen de Docker a repositorio...
-      - docker tag $IMAGE_REPO_NAME:latest 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:latest
+      - docker tag appnode:latest 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       #- docker push 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:$IMAGE_TAG
+      - docker push 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:latest
       - aws ecs update-service --cluster $CLUSTER --service $SERVICE  --force-new-deployment
 artifacts:
   files: 
