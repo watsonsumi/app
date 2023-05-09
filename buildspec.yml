@@ -30,7 +30,7 @@ phases:
       - echo Pushing the Docker image...
       #- docker push 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:$IMAGE_TAG
       - docker push 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:latest
-      - docker push 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:image-latest
+      - docker push 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:imagelatest
       - aws ecs update-service --cluster $CLUSTER --service $SERVICE  --force-new-deployment
 
 
