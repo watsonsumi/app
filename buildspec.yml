@@ -6,7 +6,7 @@ env:
     CLUSTER: "demo"
     SERVICE: "appnode"
     IMAGE_REPO_NAME: "appnode"
-    IMAGE_TAG: 1
+    IMAGE_TAG: "latest"
     
 phases:
   install:
@@ -31,6 +31,15 @@ phases:
       #- docker push 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:$IMAGE_TAG
       - docker push 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:latest
       - aws ecs update-service --cluster $CLUSTER --service $SERVICE  --force-new-deployment
+
+
+      # - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - printf '{"ImageURI":"%s"}' 596059741778.dkr.ecr.us-east-1.amazonaws.com/appnode:latest  > imageDetail.json
+      - sed -i 's/<APP_NAME>/'$IMAGE_REPO_NAME'/g' appspec.yml taskdef.json
+      - sed -i 's/<SERVICE_PORT>/'$SERVICE_PORT'/g' appspec.yml taskdef.json
+      - sed -i 's/<AWS_ACCOUNT_ID>/'$AWS_ACCOUNT_ID'/g' taskdef.json
+      - sed -i 's/<MEMORY_RESV>/'$MEMORY_RESV'/g' taskdef.json
+      - sed -i 's/<IMAGE_NAME>/'$AWS_ACCOUNT_ID'\.dkr\.ecr\.'$AWS_DEFAULT_REGION'\.amazonaws.com\/'$IMAGE_REPO_NAME'\:'$IMAGE_TAG'/g' taskdef.json
 artifacts:
   files: 
     - imageDetail.json
